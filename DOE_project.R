@@ -1,4 +1,6 @@
 ################## DOE project ####################
+
+# Plot the graph of historical prices
 # https://www.nasdaqomxnordic.com/indexes/historical_prices?Instrument=SE0000337842
 price <- read.table("OMXS30reverse-1986-10-31-2015-10-30.csv", 
                    header = F, fill=T, sep = ",")
@@ -50,7 +52,7 @@ qf(.95, df1=1, df2=346) # 3.868475
 
 #detach(Data)
 
-######################## checking the assumptions ##############################
+######################## Checking the assumptions ##############################
 
 # additivity
 
@@ -78,13 +80,15 @@ acf(Residuals) # Seems fine
 ##### constant variance?
 # dotplot of return A vs B
 
-#bartlett.test(Return ~ Period) ####################################### Check! ##########
+#bartlett.test(Return ~ Period) 
 
 require(ggplot2)
 ggplot(fit, aes(Return, Period, colour = Period)) + geom_point()
 
 # plot(Period, Residuals)
 plot(result)
+
 sum(ReturnA)/174 # 1.889949
 sum(ReturnB)/174 # -0.08621389
+
 # http://homepages.inf.ed.ac.uk/bwebb/statistics/ANOVA_in_R.pdf
